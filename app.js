@@ -10,6 +10,7 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 let tasks = [];
+let taskIdCounter = 0;
 
 app.get("/", (req, res) => {
   res.render("index", { tasks: tasks });
@@ -20,22 +21,28 @@ app.post("/add", (req, res) => {
   if (newItem === "") {
     return res.send("<script>alert('Task cannot be empty!'); window.location.href='/';</script>");
   }
-  tasks.push({ name: newItem, priority: "Medium" });
+  const newTask = {
+    id: taskIdCounter++,
+    name: newItem,
+    priority: "Medium"
+  };
+  tasks.push(newTask);
   res.redirect("/");
 });
 
 app.post("/edit/:id", (req, res) => {
   const id = req.params.id;
-  const updatedName = prompt("Enter new task name:");
-  if (updatedName) {
-    tasks[id].name = updatedName;
+  const updatedName = req.body.updatedName;
+  const task = tasks.find(t => t.id == id);
+  if (task && updatedName && updatedName.trim() !== "") {
+    task.name = updatedName.trim();
   }
   res.redirect("/");
 });
 
 app.post("/delete/:id", (req, res) => {
   const id = req.params.id;
-  tasks.splice(id, 1);
+  tasks = tasks.filter(task => task.id != id);
   res.redirect("/");
 });
 
@@ -44,7 +51,7 @@ app.get("/filter", (req, res) => {
   const filteredTasks = priority
     ? tasks.filter(task => task.priority === priority)
     : tasks;
-  res.render("list", { tasks: filteredTasks });
+  res.render("index", { tasks: filteredTasks });
 });
 
 app.listen(port, () => {

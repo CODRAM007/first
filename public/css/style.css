@@ -46,17 +46,21 @@ input[type="text"] {
 }
 
 button {
-  padding: 0.75rem;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: 0.5rem;
-  background-color: #27ae60;
-  color: white;
+  background-color: #3498db;
+  color: #fff;
   cursor: pointer;
-  margin-left: 0.5rem;
+  border-radius: 4px;
 }
 
 button:hover {
-  background-color: #2ecc71;
+  background-color: #2980b9;
+}
+
+button::before,
+button::after {
+  content: "" !important;
 }
 
 ul {
@@ -75,16 +79,19 @@ li {
 .priority {
   margin-left: 1rem;
   font-size: 0.85rem;
-  color: #888;
+  color: black;
 }
 
-.edit-btn, .delete-btn {
+.edit-btn {
   margin-left: 0.5rem;
   background-color: #f39c12;
+  color: #fff;
 }
 
 .delete-btn {
+  margin-left: 0.5rem;
   background-color: #e74c3c;
+  color: #fff;
 }
 
 .filter-box {
@@ -98,6 +105,17 @@ li {
 
   button {
     padding: 0.5rem;
+  }
+  .todo-box {
+    padding: 1rem;
+    height: auto;
+  }
+  li {
+    flex-wrap: wrap;
+  }
+
+  li div {
+    margin-top: 0.5rem;
   }
 }
 

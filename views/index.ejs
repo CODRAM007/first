@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Todo App</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
   <%- include("partials/header") %>
@@ -28,14 +28,16 @@
     </div>
 
     <ul>
-      <% tasks.forEach((task, index) => { %>
+      <% tasks.forEach((task) => { %>
         <li>
           <span><%= task.name %> <span class="priority">[<%= task.priority %>]</span></span>
           <div>
-            <form action="/edit/<%= index %>" method="POST" style="display:inline">
-              <button type="submit" class="edit-btn">Edit</button>
+            <form id="edit-form-<%= task.id %>" action="/edit/<%= task.id %>" method="POST" style="display:inline">
+              <input type="hidden" name="updatedName" id="updatedName-<%= task.id %>">
+              <button type="button" class="edit-btn" onclick="editTask(<%= task.id %>)">Edit</button>
             </form>
-            <form action="/delete/<%= index %>" method="POST" style="display:inline">
+
+            <form action="/delete/<%= task.id %>" method="POST" style="display:inline">
               <button type="submit" class="delete-btn">Delete</button>
             </form>
           </div>
@@ -47,5 +49,6 @@
 
 <%- include("partials/footer") %>
 
+<script src="/script.js"></script>
 </body>
 </html>
