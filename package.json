@@ -5,10 +5,11 @@
   "license": "ISC",
   "author": "sanoj",
   "type": "commonjs",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "start": "node index.js"
   },
+
   "dependencies": {
     "body-parser": "^2.2.0",
     "ejs": "^3.1.10",
